@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet"link
+        href=""
+        rel="stylesheet">
+        <title>Number guessing game</title>
+    </head>
+    <style>
+        p{  
+            margin: 5px;
+        }
+        body{
+            text-shadow: 0 0 10px cyan;
+            font-weight: bold;
+            color: white;
+        }
+        h1{
+            margin: 10px;
+            border: 2px;
+            border-color: white;
+            font-family: "New Tegomin", serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 40px;
+            font-weight: bold;
+            color: linear-gradient(to left, #fcfeff, #e4e4e4);
+        }
+        button{
+            padding: 5px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px cyan;
+            background: rgb(214, 214, 214);
+        }
+        .container{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center;
+            text-align: center;
+            transform: scale(2.5);
+            height: 100vh;
+        }
+        #big-video{
+            position: fixed;
+            top: 0%;
+            left: 0%;
+           width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .buttons{
+            display:flex;
+            margin: 5px;
+        }
+        input{
+            background: rgb(216, 206, 206);
+            box-shadow: 0px 0px 10px cyan;
+            height: 50%;
+            width: 25%;
+        }
+
+    </style>
+    <body>
+        <video autoplay muted loop
+        id="big-video"> 
+            <source src="2.mp4">
+        </video>
+     <div class="container">
+        <h1>Number guessing game</h1>
+      <div class="buttons">
+        <span>Guess a number from 1 to 100:</span>
+        <input id="A" type="number" placeholder="Enter number here" >
+      </div>
+        <div class="buttons">
+         <button id="B" onclick="c()">check</button>
+        <button id="f" onclick="reset()">Restart</button>
+        </div>
+        <p id="C"></p>
+        <div class="buttons">
+            <p id="chancedetails">You have 7 chances</p>
+            <p id="e"></p>
+        </div>    
+     </div>
+    <script>
+        let num=Math.floor(Math.random()*100)+1;
+        let x=document.getElementById("A");
+        let y=document.getElementById("C");
+        let count=0;
+        function reset(){
+            num=Math.floor(Math.random()*100)+1;
+            count=0;
+            x.value="";
+            y.innerText="";
+            document.getElementById("e").innerText="";
+            document.getElementById("chancedetails").innerText="You have 6 chances";
+        }
+        function c(){
+            if(x.value==""){
+                alert("enter number");
+            }
+            else if(Number(x.value)==num){
+                count++;
+                y.innerText="correct";
+                document.getElementById("chancedetails").innerText="no of chances taken ";
+                document.getElementById("e").innerText=count;
+            }
+            else if(count==6){
+                alert("game over");
+                reset();
+            }
+            else if(Number(x.value)>num){
+                y.innerText="very high";
+                count++;
+            }
+             else{
+                y.innerText="very low";
+                count++;
+            }
+            x.value="";
+            document.getElementById("chancedetails").innerText="remaining chances: ";
+            document.getElementById("e").innerText=7-count;
+        }
+
+    </script>
+</body>
+</html>
